@@ -1,0 +1,27 @@
+﻿tabla,campo,tipo,unidad,valores_permitidos,descripción
+variedades,variedad_id,texto,,,ID canónico de variedad
+variedades,nombre_canonico,texto,,,Nombre principal
+variedades,tipo,categórico,,cherry/redondo/testigo/s/d,Tipo de tomate
+variedades,rol,categórico,,evaluación/testigo,Rol en el ensayo
+variedades,sinonimos,texto,, | ,Otras denominaciones (ej. 56 = Nomeolvides = Perón)
+variedades,procedencia_descripcion,texto,,,Origen/colección y cadena de custodia
+variedades,estado_trazabilidad,texto,,,Nivel de verificación de la procedencia
+participantes,id_participante,texto,,AA/AB/H###T,ID anónimo estable entre campañas
+participantes,genero,categórico,,F/M/s/d,Género autorreportado
+participantes,campañas,texto,, | ,Campañas en que aparece
+sitios,campaña,categórico,,2022-2023 … 2025-2026,Campaña
+sitios,id_sitio,texto,,,Sitio de evaluación
+sitios,id_participante,texto,,,Enlace a participantes
+sitios,provincia,texto,,jurisdicciones argentinas normalizadas/s/d,Provincia o jurisdicción. CABA se registra como jurisdicción propia; s/d indica dato no disponible.
+sitios,ciudad,texto,,,Localidad normalizada cuando fue posible; s/d indica dato no disponible.
+sitios,recibio_semilla,categórico,,Sí/No/s/d,
+observaciones_agronomicas,campaña,categórico,,,
+observaciones_agronomicas,id_sitio,texto,,,Enlace a sitios
+observaciones_agronomicas,variedad_id,texto,,,Enlace a variedades
+observaciones_agronomicas,variedad_original,texto,,,Texto original del evaluador
+observaciones_agronomicas,etapa,categórico,,8 etapas,
+observaciones_agronomicas,variable,texto,,,
+observaciones_agronomicas,valor,mixto,varía,,Valor observado. Las fechas exactas se expresan en ISO 8601 (AAAA-MM-DD); fechas aproximadas históricas pueden conservar texto.
+observaciones_agronomicas,nota,texto,,,"Correcciones, valores originales preservados, exclusiones y marca de campaña histórica."
+degustacion_publica,,,,,ver campaña 2025-2026
+contribuyentes,,,,,autoría y roles (CRediT)

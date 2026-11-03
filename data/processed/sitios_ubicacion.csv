@@ -1,0 +1,101 @@
+sitio_id,participante_id,provincia,localidad
+AA001T,AA001T,CABA,Ciudad Autónoma de Buenos Aires
+AA001T-Maipu,AA001T,Mendoza,Maipu
+AA002T,AA002T,CABA,Ciudad Autónoma de Buenos Aires
+AA003T,AA003T,Buenos Aires,Berisso
+AA004T,AA004T,CABA,Ciudad Autónoma de Buenos Aires
+AA005T,AA005T,Río Negro,Cipoletti
+AA006T,AA006T,Buenos Aires,Tres sargentos
+AA007T,AA007T,CABA,Ciudad Autónoma de Buenos Aires
+AA008T,AA008T,Buenos Aires,Lobos
+AA009T,AA009T,Río Negro,Dina Huapi
+AA010T,AA010T,Buenos Aires,Florencio Varela
+AA011T,AA011T,Entre Ríos,Colon
+AA012T,AA012T,Buenos Aires,Gonzalez Catán
+AA013T,AA013T,Santa Fe,San Carlos Centro
+AA013T-SantaFe,AA013T,Santa Fe,Santa Fe
+AA014T,AA014T,Buenos Aires,Mar del Plata
+AA015T,AA015T,Buenos Aires,Cañuelas
+AA016T,AA016T,CABA,Ciudad Autónoma de Buenos Aires
+AA017T,AA017T,Chubut,Rawson
+AA018T,AA018T,Buenos Aires,Balcarce
+AA019T,AA019T,,
+AA020T,AA020T,Río Negro,General Fernández Oro
+AA021T,AA021T,CABA,Ciudad Autónoma de Buenos Aires
+AA022T,AA022T,Río Negro,Bariloche
+AA023T,AA023T,Buenos Aires,Martinez
+AA031T,AA031T,Buenos Aires,"El Peligro, Arturo Segui, La Plata"
+AA041T,AA041T,Buenos Aires,zona rural darregueira
+AA048T,AA048T,Buenos Aires,SIERRA DE LA VENTANA
+AA052T,AA052T,Buenos Aires,Carapachay
+AA067T,AA067T,Santa Fe,Esperanza
+AA089T,AA089T,Buenos Aires,San Andrés
+AA122T,AA122T,Santa Fe,Esperanza
+AA138T,AA138T,CABA,Ciudad Autónoma de Buenos Aires
+AA148T,AA148T,CABA,Ciudad Autónoma de Buenos Aires
+AA152T,AA152T,CABA,Ciudad Autónoma de Buenos Aires
+AB001T,AB001T,Río Negro,General Roca
+AB002T,AB002T,Buenos Aires,"Los Talas, Berisso"
+AB005T,AB005T,Buenos Aires,Mar del Plata
+AB007T,AB007T,CABA,Ciudad Autónoma de Buenos Aires
+AB008T,AB008T,CABA,Ciudad Autónoma de Buenos Aires
+AB009T,AB009T,CABA,Ciudad Autónoma de Buenos Aires
+AB010T,AB010T,CABA,Ciudad Autónoma de Buenos Aires
+AB011T,AB011T,CABA,Ciudad Autónoma de Buenos Aires
+AB013T-Derqui,AB013T,Buenos Aires,Pilar
+AB013T-Manzanares,AB013T,Buenos Aires,Pilar
+AB013T-UNSAM,AB013T,Buenos Aires,San Martin
+H001T,H001T,CABA,Ciudad Autónoma de Buenos Aires
+H002T,H002T,Buenos Aires,Villa Lynch - Gral San Martin
+H003T,H003T,Buenos Aires,Dique Luján
+H004T,H004T,Buenos Aires,Vicente López
+H005T,H005T,CABA,Ciudad Autónoma de Buenos Aires
+H006T,H006T,Buenos Aires,Béccar
+H007T,H007T,CABA,Ciudad Autónoma de Buenos Aires
+H008T,H008T,Buenos Aires,Azul
+H009T,H009T,Buenos Aires,Ezeiza
+H010T,H010T,Buenos Aires,Ituzaingó
+H011T,H011T,Neuquén,Villa La Angostura
+H012T,H012T,Buenos Aires,Mar del Plata
+H013T,H013T,Córdoba,Unquillo
+H014T,H014T,Córdoba,Salsipuedes
+H015T,H015T,Buenos Aires,villa ballester
+H016T,H016T,Río Negro,Viedma
+H017T,H017T,CABA,Ciudad Autónoma de Buenos Aires
+H018T,H018T,Misiones,"Santa Rita, Colonia San Francisco"
+H019T,H019T,Buenos Aires,El Palomar
+H020T,H020T,Río Negro,General Roca
+H021T,H021T,San Luis,El Trapiche
+H022T,H022T,CABA,Ciudad Autónoma de Buenos Aires
+H023T,H023T,Buenos Aires,San Miguel
+H024T,H024T,CABA,Ciudad Autónoma de Buenos Aires
+H025T,H025T,Buenos Aires,Sarandí
+H026T,H026T,CABA,Ciudad Autónoma de Buenos Aires
+H027T,H027T,Tucumán,Yerba Buena
+H028T,H028T,Neuquén,Neuquen
+H029T,H029T,Santa Fe,Arroyo Seco
+H030T,H030T,Santa Fe,Venado Tuerto
+H030T-Rufino,H030T,Santa Fe,Rufino
+H031T,H031T,CABA,Ciudad Autónoma de Buenos Aires
+H032T,H032T,Buenos Aires,Glew
+H033T,H033T,Buenos Aires,Trenque Lauquen
+H034T,H034T,Buenos Aires,Tigre
+H035T,H035T,Córdoba,Brinkmann
+H036T,H036T,CABA,Ciudad Autónoma de Buenos Aires
+H037T,H037T,CABA,Ciudad Autónoma de Buenos Aires
+H038T,H038T,Buenos Aires,General Alvarado
+H039T,H039T,Buenos Aires,Trenque Lauquen
+H040T,H040T,Buenos Aires,Bahía Blanca
+H041T,H041T,CABA,Ciudad Autónoma de Buenos Aires
+H042T,H042T,CABA,Ciudad Autónoma de Buenos Aires
+H043T,H043T,Buenos Aires,Banfield
+H044T,H044T,Buenos Aires,Exaltación de la cruz
+H045T,H045T,Buenos Aires,Berazategui
+H046T,H046T,CABA,Ciudad Autónoma de Buenos Aires
+H047T,H047T,Buenos Aires,Banfield
+H048T,H048T,Buenos Aires,Camet Norte
+H049T,H049T,Tucumán,San Miguel de Tucumán
+H050T,H050T,Buenos Aires,"Villa Tesei, Hurlingham"
+H051T,H051T,Buenos Aires,Castelar
+H052T,H052T,Buenos Aires,Escobar
+H053T,H053T,Buenos Aires,Berazategui

@@ -41,7 +41,7 @@ pip install -r requirements.txt
 ## 4. Correr el tablero
 
 ```bash
-streamlit run app.py
+streamlit run dashboard.py
 ```
 
 Se abre en el navegador en http://localhost:8501.
@@ -53,9 +53,9 @@ Se abre en el navegador en http://localhost:8501.
 
 | Archivo | Para qué sirve |
 |---|---|
-| `app.py` | El tablero |
+| `dashboard.py` | El tablero |
 | `requirements.txt` | Dependencias de Python |
-| `vistas.sql` | Definición de la vista `v_ensayos_ancho` |
+| `vista_ancha.sql` | Definición de la vista `v_ensayos_ancho` |
 | `.gitignore` | Evita subir `.env` y archivos temporales |
 
 

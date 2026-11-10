@@ -1,6 +1,6 @@
 # Variables de entorno sensibles
 .env
+.venv
 
 __pycache__/
 .streamlit/secrets.toml
-.venv

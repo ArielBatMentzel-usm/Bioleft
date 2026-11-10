@@ -225,7 +225,7 @@ with t_part:
     a.plotly_chart(px.bar(por_camp, x="campana", y="acumulado", text="acumulado", title="Ensayos acumulados a la fecha",
                           labels={"campana": "Campaña", "acumulado": "Ensayos"},
                           color_discrete_sequence=[COLOR_PRINCIPAL]), width="stretch")
-    a.caption("Cada barra suma los ensayos de esa campaña y de las anteriores.")
+    a.caption("*Cada barra suma los ensayos de esa campaña y de las anteriores.*")
 
     por_prov = f.groupby("provincia")["ensayo_id"].nunique().sort_values().reset_index(name="ensayos")
     b.plotly_chart(px.bar(por_prov, x="ensayos", y="provincia", orientation="h", text="ensayos", title="Ensayos por provincia",

@@ -32,36 +32,19 @@ CREATE TABLE "degustacion_comparativa" (
 
 CREATE INDEX "idx_comentarios_ensayo" ON "comentarios" ("ensayo_id");
 
-CREATE UNIQUE INDEX "uq_degustacion_comp_sesion" ON "degustacion_comparativa" ("campana", "sitio_id");
-
 ALTER TABLE "comentarios" ADD FOREIGN KEY ("ensayo_id") REFERENCES "ensayos" ("ensayo_id") ON DELETE CASCADE ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "comentarios" ADD FOREIGN KEY ("etapa_id") REFERENCES "etapas" ("etapa_id") ON DELETE RESTRICT ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "degustacion_comparativa" ADD FOREIGN KEY ("sitio_id") REFERENCES "sitios" ("sitio_id") ON DELETE RESTRICT ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "degustacion_comparativa" ADD FOREIGN KEY ("campana") REFERENCES "campanas" ("campana") ON DELETE RESTRICT ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "degustacion_comparativa" ADD FOREIGN KEY ("mas_atractiva_vista_variedad_id") REFERENCES "variedades" ("variedad_id") ON DELETE SET NULL ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "degustacion_comparativa" ADD FOREIGN KEY ("menos_atractiva_vista_variedad_id") REFERENCES "variedades" ("variedad_id") ON DELETE SET NULL ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "degustacion_comparativa" ADD FOREIGN KEY ("mejor_aroma_variedad_id") REFERENCES "variedades" ("variedad_id") ON DELETE SET NULL ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "degustacion_comparativa" ADD FOREIGN KEY ("peor_aroma_variedad_id") REFERENCES "variedades" ("variedad_id") ON DELETE SET NULL ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "degustacion_comparativa" ADD FOREIGN KEY ("mejor_equilibrio_variedad_id") REFERENCES "variedades" ("variedad_id") ON DELETE SET NULL ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "degustacion_comparativa" ADD FOREIGN KEY ("peor_equilibrio_variedad_id") REFERENCES "variedades" ("variedad_id") ON DELETE SET NULL ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "degustacion_comparativa" ADD FOREIGN KEY ("mejor_sabor_variedad_id") REFERENCES "variedades" ("variedad_id") ON DELETE SET NULL ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "degustacion_comparativa" ADD FOREIGN KEY ("peor_sabor_variedad_id") REFERENCES "variedades" ("variedad_id") ON DELETE SET NULL ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "degustacion_comparativa" ADD FOREIGN KEY ("mejor_textura_variedad_id") REFERENCES "variedades" ("variedad_id") ON DELETE SET NULL ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "degustacion_comparativa" ADD FOREIGN KEY ("peor_textura_variedad_id") REFERENCES "variedades" ("variedad_id") ON DELETE SET NULL ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "degustacion_comparativa" ADD FOREIGN KEY ("volveria_elegir_variedad_id") REFERENCES "variedades" ("variedad_id") ON DELETE SET NULL ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "degustacion_comparativa" ADD FOREIGN KEY ("no_volveria_elegir_variedad_id") REFERENCES "variedades" ("variedad_id") ON DELETE SET NULL ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;

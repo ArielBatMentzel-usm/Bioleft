@@ -4,7 +4,9 @@ CREATE TABLE "campanas" (
   "campana" TEXT NOT NULL,
   "anio_inicio" SMALLINT NOT NULL,
   "anio_fin" SMALLINT NOT NULL,
-  PRIMARY KEY ("campana")
+  PRIMARY KEY ("campana"),
+  CONSTRAINT "ck_campanas_formato" CHECK ("campana" ~ '^[0-9]{4}-[0-9]{4}$'),
+  CONSTRAINT "ck_campanas_anios" CHECK ("anio_fin" >= "anio_inicio")
 );
 
 CREATE TABLE "participantes" (
@@ -103,21 +105,13 @@ CREATE TABLE "etapas" (
 );
 
 CREATE UNIQUE INDEX "uq_cat_sustrato_valor" ON "cat_sustrato" ("valor");
-
 CREATE UNIQUE INDEX "uq_cat_cultivo_asociado_valor" ON "cat_cultivo_asociado" ("valor");
-
 CREATE UNIQUE INDEX "uq_cat_fertilizacion_valor" ON "cat_fertilizacion" ("valor");
-
 CREATE UNIQUE INDEX "uq_cat_control_plagas_valor" ON "cat_control_plagas" ("valor");
-
 CREATE UNIQUE INDEX "uq_cat_causa_desuniformidad_valor" ON "cat_causa_desuniformidad" ("valor");
-
 CREATE UNIQUE INDEX "uq_cat_sanidad_observada_valor" ON "cat_sanidad_observada" ("valor");
-
 CREATE UNIQUE INDEX "uq_cat_causa_muerte_plantas_valor" ON "cat_causa_muerte_plantas" ("valor");
-
 CREATE UNIQUE INDEX "uq_cat_control_malezas_valor" ON "cat_control_malezas" ("valor");
-
 CREATE UNIQUE INDEX "uq_cat_cobertura_suelo_valor" ON "cat_cobertura_suelo" ("valor");
 
 
@@ -153,7 +147,10 @@ CREATE TABLE "siembra" (
   "cantidad_semillas_sembradas" INTEGER,
   "fecha_emergencia" DATE,
   "cantidad_plantulas_emergidas" INTEGER,
-  PRIMARY KEY ("ensayo_id")
+  PRIMARY KEY ("ensayo_id"),
+  CONSTRAINT "ck_siembra_semillas_sembradas" CHECK ("cantidad_semillas_sembradas" >= 0),
+  CONSTRAINT "ck_siembra_plantulas_emergidas" CHECK ("cantidad_plantulas_emergidas" >= 0),
+  CONSTRAINT "ck_siembra_fechas" CHECK ("fecha_siembra" IS NULL OR "fecha_emergencia" IS NULL OR "fecha_siembra" <= "fecha_emergencia")
 );
 
 CREATE TABLE "trasplante_maceta" (
@@ -163,7 +160,10 @@ CREATE TABLE "trasplante_maceta" (
   "fecha_trasplante_maceta" DATE,
   "cantidad_plantines_trasplantados" INTEGER,
   "cantidad_plantines_implantados" INTEGER,
-  PRIMARY KEY ("ensayo_id")
+  PRIMARY KEY ("ensayo_id"),
+  CONSTRAINT "ck_maceta_profundidad" CHECK ("profundidad_contenedor_cm" > 0),
+  CONSTRAINT "ck_maceta_plantines_trasplantados" CHECK ("cantidad_plantines_trasplantados" >= 0),
+  CONSTRAINT "ck_maceta_plantines_implantados" CHECK ("cantidad_plantines_implantados" >= 0)
 );
 
 CREATE TABLE "trasplante_suelo" (
@@ -174,7 +174,11 @@ CREATE TABLE "trasplante_suelo" (
   "cantidad_plantines_trasplantados" INTEGER,
   "densidad_plantas_m2" NUMERIC(8,5),
   "cantidad_plantines_implantados" INTEGER,
-  PRIMARY KEY ("ensayo_id")
+  PRIMARY KEY ("ensayo_id"),
+  CONSTRAINT "ck_suelo_superficie" CHECK ("superficie_parcela_m2" > 0),
+  CONSTRAINT "ck_suelo_densidad" CHECK ("densidad_plantas_m2" > 0),
+  CONSTRAINT "ck_suelo_plantines_trasplantados" CHECK ("cantidad_plantines_trasplantados" >= 0),
+  CONSTRAINT "ck_suelo_plantines_implantados" CHECK ("cantidad_plantines_implantados" >= 0)
 );
 
 CREATE TABLE "labores" (
@@ -194,7 +198,12 @@ CREATE TABLE "crecimiento" (
   "sanidad" NUMERIC(2,1),
   "uniformidad" NUMERIC(2,1),
   "cantidad_plantas_muertas" INTEGER,
-  PRIMARY KEY ("ensayo_id")
+  PRIMARY KEY ("ensayo_id"),
+  CONSTRAINT "ck_crecimiento_estres_hidrico" CHECK ("tolerancia_estres_hidrico" BETWEEN 1 AND 5),
+  CONSTRAINT "ck_crecimiento_quemadura_sol" CHECK ("tolerancia_quemadura_sol" BETWEEN 1 AND 5),
+  CONSTRAINT "ck_crecimiento_sanidad" CHECK ("sanidad" BETWEEN 1 AND 5),
+  CONSTRAINT "ck_crecimiento_uniformidad" CHECK ("uniformidad" BETWEEN 1 AND 5),
+  CONSTRAINT "ck_crecimiento_plantas_muertas" CHECK ("cantidad_plantas_muertas" >= 0)
 );
 
 CREATE TABLE "labores_fructificacion" (
@@ -215,7 +224,12 @@ CREATE TABLE "cosecha_poscosecha" (
   "fecha_ultima_cosecha" DATE,
   "peso_total_cosechado_kg" NUMERIC(7,3),
   "total_frutos_cosechados" INTEGER,
-  PRIMARY KEY ("ensayo_id")
+  PRIMARY KEY ("ensayo_id"),
+  CONSTRAINT "ck_cosecha_plantas_cosechadas" CHECK ("cantidad_plantas_cosechadas" >= 0),
+  CONSTRAINT "ck_cosecha_duracion_poscosecha" CHECK ("duracion_poscosecha_dias" >= 0),
+  CONSTRAINT "ck_cosecha_peso_total" CHECK ("peso_total_cosechado_kg" >= 0),
+  CONSTRAINT "ck_cosecha_total_frutos" CHECK ("total_frutos_cosechados" >= 0),
+  CONSTRAINT "ck_cosecha_fechas" CHECK ("fecha_primera_cosecha" IS NULL OR "fecha_ultima_cosecha" IS NULL OR "fecha_primera_cosecha" <= "fecha_ultima_cosecha")
 );
 
 CREATE TABLE "degustacion" (
@@ -251,48 +265,46 @@ CREATE TABLE "degustacion" (
   "pastoso_intensidad" SMALLINT,
   "piel_dura_marcado" BOOLEAN,
   "piel_dura_intensidad" SMALLINT,
-  PRIMARY KEY ("ensayo_id")
+  PRIMARY KEY ("ensayo_id"),
+  CONSTRAINT "ck_degustacion_gusto_general" CHECK ("gusto_general" BETWEEN 1 AND 9),
+  CONSTRAINT "ck_degustacion_dulce" CHECK ("dulce_intensidad" BETWEEN 1 AND 9),
+  CONSTRAINT "ck_degustacion_acido" CHECK ("acido_intensidad" BETWEEN 1 AND 9),
+  CONSTRAINT "ck_degustacion_jugoso" CHECK ("jugoso_intensidad" BETWEEN 1 AND 9),
+  CONSTRAINT "ck_degustacion_persistente" CHECK ("persistente_intensidad" BETWEEN 1 AND 9),
+  CONSTRAINT "ck_degustacion_olor_maduro" CHECK ("olor_tomate_maduro_intensidad" BETWEEN 1 AND 9),
+  CONSTRAINT "ck_degustacion_olor_verde" CHECK ("olor_tomate_verde_intensidad" BETWEEN 1 AND 9),
+  CONSTRAINT "ck_degustacion_mucha_pulpa" CHECK ("mucha_pulpa_intensidad" BETWEEN 1 AND 9),
+  CONSTRAINT "ck_degustacion_poca_pulpa" CHECK ("poca_pulpa_intensidad" BETWEEN 1 AND 9),
+  CONSTRAINT "ck_degustacion_pulpa_dura" CHECK ("pulpa_dura_intensidad" BETWEEN 1 AND 9),
+  CONSTRAINT "ck_degustacion_pulpa_blanda" CHECK ("pulpa_blanda_intensidad" BETWEEN 1 AND 9),
+  CONSTRAINT "ck_degustacion_mucha_semilla" CHECK ("mucha_semilla_intensidad" BETWEEN 1 AND 9),
+  CONSTRAINT "ck_degustacion_poca_semilla" CHECK ("poca_semilla_intensidad" BETWEEN 1 AND 9),
+  CONSTRAINT "ck_degustacion_aguachento" CHECK ("aguachento_intensidad" BETWEEN 1 AND 9),
+  CONSTRAINT "ck_degustacion_pastoso" CHECK ("pastoso_intensidad" BETWEEN 1 AND 9),
+  CONSTRAINT "ck_degustacion_piel_dura" CHECK ("piel_dura_intensidad" BETWEEN 1 AND 9)
 );
 
 CREATE UNIQUE INDEX ON "ciudades" ("nombre", "provincia_id");
-
--- La agregamos para garantizar, mediante una FK compuesta, que cada SITIO pertenezca a una ciudad de su misma provincia.
+--La de abajo se agrega para garantizar, mediante una FK compuesta, que cada SITIO pertenezca a una ciudad de su misma provincia.
 CREATE UNIQUE INDEX ON "ciudades" ("ciudad_id", "provincia_id");
-
 CREATE INDEX "idx_ensayos_sitio" ON "ensayos" ("sitio_id");
-
 CREATE INDEX "idx_ensayos_variedad" ON "ensayos" ("variedad_id");
 
 ALTER TABLE "ciudades" ADD FOREIGN KEY ("provincia_id") REFERENCES "provincias" ("provincia_id") ON DELETE RESTRICT ON UPDATE CASCADE DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "sitios" ADD FOREIGN KEY ("participante_id") REFERENCES "participantes" ("participante_id") ON DELETE RESTRICT ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "sitios" ADD FOREIGN KEY ("provincia_id") REFERENCES "provincias" ("provincia_id") DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "sitios" ADD FOREIGN KEY ("ciudad_id", "provincia_id") REFERENCES "ciudades" ("ciudad_id", "provincia_id") DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "sitios" ADD FOREIGN KEY ("ciudad_id") REFERENCES "ciudades" ("ciudad_id") ON DELETE RESTRICT ON UPDATE CASCADE DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "ensayos" ADD FOREIGN KEY ("campana") REFERENCES "campanas" ("campana") ON DELETE RESTRICT ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "ensayos" ADD FOREIGN KEY ("sitio_id") REFERENCES "sitios" ("sitio_id") ON DELETE RESTRICT ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "ensayos" ADD FOREIGN KEY ("variedad_id") REFERENCES "variedades" ("variedad_id") ON DELETE RESTRICT ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "siembra" ADD FOREIGN KEY ("ensayo_id") REFERENCES "ensayos" ("ensayo_id") ON DELETE CASCADE ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "trasplante_maceta" ADD FOREIGN KEY ("ensayo_id") REFERENCES "ensayos" ("ensayo_id") ON DELETE CASCADE ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "trasplante_suelo" ADD FOREIGN KEY ("ensayo_id") REFERENCES "ensayos" ("ensayo_id") ON DELETE CASCADE ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "labores" ADD FOREIGN KEY ("ensayo_id") REFERENCES "ensayos" ("ensayo_id") ON DELETE CASCADE ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "crecimiento" ADD FOREIGN KEY ("ensayo_id") REFERENCES "ensayos" ("ensayo_id") ON DELETE CASCADE ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "labores_fructificacion" ADD FOREIGN KEY ("ensayo_id") REFERENCES "ensayos" ("ensayo_id") ON DELETE CASCADE ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "cosecha_poscosecha" ADD FOREIGN KEY ("ensayo_id") REFERENCES "ensayos" ("ensayo_id") ON DELETE CASCADE ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "degustacion" ADD FOREIGN KEY ("ensayo_id") REFERENCES "ensayos" ("ensayo_id") ON DELETE CASCADE ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
 
 
@@ -359,63 +371,35 @@ CREATE TABLE "cobertura_suelo" (
 );
 
 CREATE INDEX "idx_ensayo_sustrato_sustrato" ON "sustrato" ("sustrato_id");
-
 CREATE INDEX "idx_ensayo_cultivo_asociado_maceta_cultivo_asociado" ON "cultivo_asociado_maceta" ("cultivo_asociado_id");
-
 CREATE INDEX "idx_ensayo_cultivo_asociado_suelo_cultivo_asociado" ON "cultivo_asociado_suelo" ("cultivo_asociado_id");
-
 CREATE INDEX "idx_ensayo_fertilizacion_fertilizacion" ON "fertilizacion" ("fertilizacion_id");
-
 CREATE INDEX "idx_ensayo_control_plagas_control_plagas" ON "control_plagas" ("control_plagas_id");
-
 CREATE INDEX "idx_ensayo_causa_desuniformidad_causa_desuniformidad" ON "causa_desuniformidad" ("causa_desuniformidad_id");
-
 CREATE INDEX "idx_ensayo_sanidad_observada_sanidad_observada" ON "sanidad_observada" ("sanidad_observada_id");
-
 CREATE INDEX "idx_ensayo_causa_muerte_plantas_causa_muerte_plantas" ON "causa_muerte_plantas" ("causa_muerte_plantas_id");
-
 CREATE INDEX "idx_ensayo_control_malezas_control_malezas" ON "control_malezas" ("control_malezas_id");
-
 CREATE INDEX "idx_ensayo_cobertura_suelo_cobertura_suelo" ON "cobertura_suelo" ("cobertura_suelo_id");
 
 ALTER TABLE "sustrato" ADD FOREIGN KEY ("ensayo_id") REFERENCES "trasplante_maceta" ("ensayo_id") ON DELETE CASCADE ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "sustrato" ADD FOREIGN KEY ("sustrato_id") REFERENCES "cat_sustrato" ("sustrato_id") ON DELETE RESTRICT ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "cultivo_asociado_maceta" ADD FOREIGN KEY ("ensayo_id") REFERENCES "trasplante_maceta" ("ensayo_id") ON DELETE CASCADE ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "cultivo_asociado_maceta" ADD FOREIGN KEY ("cultivo_asociado_id") REFERENCES "cat_cultivo_asociado" ("cultivo_asociado_id") ON DELETE RESTRICT ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "cultivo_asociado_suelo" ADD FOREIGN KEY ("ensayo_id") REFERENCES "trasplante_suelo" ("ensayo_id") ON DELETE CASCADE ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "cultivo_asociado_suelo" ADD FOREIGN KEY ("cultivo_asociado_id") REFERENCES "cat_cultivo_asociado" ("cultivo_asociado_id") ON DELETE RESTRICT ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "fertilizacion" ADD FOREIGN KEY ("ensayo_id") REFERENCES "labores" ("ensayo_id") ON DELETE CASCADE ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "fertilizacion" ADD FOREIGN KEY ("fertilizacion_id") REFERENCES "cat_fertilizacion" ("fertilizacion_id") ON DELETE RESTRICT ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "control_plagas" ADD FOREIGN KEY ("ensayo_id") REFERENCES "labores" ("ensayo_id") ON DELETE CASCADE ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "control_plagas" ADD FOREIGN KEY ("control_plagas_id") REFERENCES "cat_control_plagas" ("control_plagas_id") ON DELETE RESTRICT ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "causa_desuniformidad" ADD FOREIGN KEY ("ensayo_id") REFERENCES "crecimiento" ("ensayo_id") ON DELETE CASCADE ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "causa_desuniformidad" ADD FOREIGN KEY ("causa_desuniformidad_id") REFERENCES "cat_causa_desuniformidad" ("causa_desuniformidad_id") ON DELETE RESTRICT ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "sanidad_observada" ADD FOREIGN KEY ("ensayo_id") REFERENCES "crecimiento" ("ensayo_id") ON DELETE CASCADE ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "sanidad_observada" ADD FOREIGN KEY ("sanidad_observada_id") REFERENCES "cat_sanidad_observada" ("sanidad_observada_id") ON DELETE RESTRICT ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "causa_muerte_plantas" ADD FOREIGN KEY ("ensayo_id") REFERENCES "crecimiento" ("ensayo_id") ON DELETE CASCADE ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "causa_muerte_plantas" ADD FOREIGN KEY ("causa_muerte_plantas_id") REFERENCES "cat_causa_muerte_plantas" ("causa_muerte_plantas_id") ON DELETE RESTRICT ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "control_malezas" ADD FOREIGN KEY ("ensayo_id") REFERENCES "labores" ("ensayo_id") ON DELETE CASCADE ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "control_malezas" ADD FOREIGN KEY ("control_malezas_id") REFERENCES "cat_control_malezas" ("control_malezas_id") ON DELETE RESTRICT ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "cobertura_suelo" ADD FOREIGN KEY ("ensayo_id") REFERENCES "trasplante_suelo" ("ensayo_id") ON DELETE CASCADE ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "cobertura_suelo" ADD FOREIGN KEY ("cobertura_suelo_id") REFERENCES "cat_cobertura_suelo" ("cobertura_suelo_id") ON DELETE RESTRICT ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
 
 
@@ -453,36 +437,19 @@ CREATE TABLE "degustacion_comparativa" (
 
 CREATE INDEX "idx_comentarios_ensayo" ON "comentarios" ("ensayo_id");
 
-CREATE UNIQUE INDEX "uq_degustacion_comp_sesion" ON "degustacion_comparativa" ("campana", "sitio_id");
-
 ALTER TABLE "comentarios" ADD FOREIGN KEY ("ensayo_id") REFERENCES "ensayos" ("ensayo_id") ON DELETE CASCADE ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "comentarios" ADD FOREIGN KEY ("etapa_id") REFERENCES "etapas" ("etapa_id") ON DELETE RESTRICT ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "degustacion_comparativa" ADD FOREIGN KEY ("sitio_id") REFERENCES "sitios" ("sitio_id") ON DELETE RESTRICT ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "degustacion_comparativa" ADD FOREIGN KEY ("campana") REFERENCES "campanas" ("campana") ON DELETE RESTRICT ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "degustacion_comparativa" ADD FOREIGN KEY ("mas_atractiva_vista_variedad_id") REFERENCES "variedades" ("variedad_id") ON DELETE SET NULL ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "degustacion_comparativa" ADD FOREIGN KEY ("menos_atractiva_vista_variedad_id") REFERENCES "variedades" ("variedad_id") ON DELETE SET NULL ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "degustacion_comparativa" ADD FOREIGN KEY ("mejor_aroma_variedad_id") REFERENCES "variedades" ("variedad_id") ON DELETE SET NULL ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "degustacion_comparativa" ADD FOREIGN KEY ("peor_aroma_variedad_id") REFERENCES "variedades" ("variedad_id") ON DELETE SET NULL ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "degustacion_comparativa" ADD FOREIGN KEY ("mejor_equilibrio_variedad_id") REFERENCES "variedades" ("variedad_id") ON DELETE SET NULL ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "degustacion_comparativa" ADD FOREIGN KEY ("peor_equilibrio_variedad_id") REFERENCES "variedades" ("variedad_id") ON DELETE SET NULL ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "degustacion_comparativa" ADD FOREIGN KEY ("mejor_sabor_variedad_id") REFERENCES "variedades" ("variedad_id") ON DELETE SET NULL ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "degustacion_comparativa" ADD FOREIGN KEY ("peor_sabor_variedad_id") REFERENCES "variedades" ("variedad_id") ON DELETE SET NULL ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "degustacion_comparativa" ADD FOREIGN KEY ("mejor_textura_variedad_id") REFERENCES "variedades" ("variedad_id") ON DELETE SET NULL ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "degustacion_comparativa" ADD FOREIGN KEY ("peor_textura_variedad_id") REFERENCES "variedades" ("variedad_id") ON DELETE SET NULL ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "degustacion_comparativa" ADD FOREIGN KEY ("volveria_elegir_variedad_id") REFERENCES "variedades" ("variedad_id") ON DELETE SET NULL ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
-
 ALTER TABLE "degustacion_comparativa" ADD FOREIGN KEY ("no_volveria_elegir_variedad_id") REFERENCES "variedades" ("variedad_id") ON DELETE SET NULL ON UPDATE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;

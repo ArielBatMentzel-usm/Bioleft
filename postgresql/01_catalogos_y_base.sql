@@ -4,7 +4,9 @@ CREATE TABLE "campanas" (
   "campana" TEXT NOT NULL,
   "anio_inicio" SMALLINT NOT NULL,
   "anio_fin" SMALLINT NOT NULL,
-  PRIMARY KEY ("campana")
+  PRIMARY KEY ("campana"),
+  CONSTRAINT "ck_campanas_formato" CHECK ("campana" ~ '^[0-9]{4}-[0-9]{4}$'),
+  CONSTRAINT "ck_campanas_anios" CHECK ("anio_fin" >= "anio_inicio")
 );
 
 CREATE TABLE "participantes" (
@@ -103,19 +105,11 @@ CREATE TABLE "etapas" (
 );
 
 CREATE UNIQUE INDEX "uq_cat_sustrato_valor" ON "cat_sustrato" ("valor");
-
 CREATE UNIQUE INDEX "uq_cat_cultivo_asociado_valor" ON "cat_cultivo_asociado" ("valor");
-
 CREATE UNIQUE INDEX "uq_cat_fertilizacion_valor" ON "cat_fertilizacion" ("valor");
-
 CREATE UNIQUE INDEX "uq_cat_control_plagas_valor" ON "cat_control_plagas" ("valor");
-
 CREATE UNIQUE INDEX "uq_cat_causa_desuniformidad_valor" ON "cat_causa_desuniformidad" ("valor");
-
 CREATE UNIQUE INDEX "uq_cat_sanidad_observada_valor" ON "cat_sanidad_observada" ("valor");
-
 CREATE UNIQUE INDEX "uq_cat_causa_muerte_plantas_valor" ON "cat_causa_muerte_plantas" ("valor");
-
 CREATE UNIQUE INDEX "uq_cat_control_malezas_valor" ON "cat_control_malezas" ("valor");
-
 CREATE UNIQUE INDEX "uq_cat_cobertura_suelo_valor" ON "cat_cobertura_suelo" ("valor");

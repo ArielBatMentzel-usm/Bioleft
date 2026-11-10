@@ -181,7 +181,9 @@ def cargar() -> pd.DataFrame:
 def explotar(df: pd.DataFrame, col: str) -> pd.DataFrame:
     x = df[["ensayo_id", "campana", col]].dropna(subset=[col]).copy()
     x[col] = x[col].astype(str).str.split(SEP, regex=False)
-    return x.explode(col).rename(columns={col: "valor"})
+    x = x.explode(col)
+    x[col] = x[col].astype(str).str.strip()  # Limpia espacios extra al separar
+    return x.rename(columns={col: "valor"})
 
 
 # --- DATOS + FILTROS
@@ -373,7 +375,7 @@ with t_tec:
                                    color="grupo", color_discrete_sequence=PALETA_DISCRETA), width="stretch")
             st.caption("Cada punto es un ensayo; la caja resume la distribución.")
 
-    # MANEJO (multivalor)
+    # ---------------------------------------------------------------- Manejo multivalor
     with sub_man:
         if not multi:
             st.info("La vista no trae variables multivalor.")
@@ -383,28 +385,44 @@ with t_tec:
             por_c = c2.checkbox("Separar por campaña")
             ex = explotar(f, mv)
             base = f[f[mv].notna()]
+            
             if por_c:
                 cnt = ex.groupby(["campana", "valor"])["ensayo_id"].nunique().reset_index(name="k")
-                cnt["pct"] = cnt["k"] / cnt["campana"].map(base.groupby("campana")["ensayo_id"].nunique()) * 100
-                fig = px.bar(cnt, x="pct", y="valor", color="campana", orientation="h", barmode="group", hover_data={"k": True},
-                             color_discrete_sequence=PALETA_DISCRETA)
+                fig = px.bar(
+                    cnt, x="k", y="valor", color="campana", orientation="h", barmode="group",
+                    text="k", hover_data={"k": True},
+                    color_discrete_sequence=PALETA_DISCRETA,
+                    labels={"k": "Cantidad de ensayos", "valor": "", "campana": "Campaña"}
+                )
+                fig.update_traces(texttemplate='%{text}')
             else:
                 cnt = ex.groupby("valor")["ensayo_id"].nunique().reset_index(name="k")
-                cnt["pct"] = cnt["k"] / base["ensayo_id"].nunique() * 100
-                cnt = cnt.sort_values("pct")
-                fig = px.bar(cnt, x="pct", y="valor", orientation="h", text="k", hover_data={"k": True},
-                             color="pct", color_continuous_scale=PALETA_CONTINUA)
-            fig.update_layout(title=f"{etiqueta(mv)}: opciones elegidas", xaxis_title="% de ensayos que lo mencionan", yaxis_title=None)
+                cnt = cnt.sort_values("k")
+                
+                fig = px.bar(
+                    cnt, x="k", y="valor", orientation="h", text="k", hover_data={"k": True},
+                    color="k", color_continuous_scale=PALETA_CONTINUA,
+                    labels={"k": "Cantidad de ensayos", "valor": ""}
+                )
+                fig.update_traces(texttemplate='%{text}')
+            
+            fig.update_layout(
+                title=f"{etiqueta(mv)}: opciones elegidas", 
+                xaxis_title="Cantidad de ensayos", 
+                yaxis_title=None,
+                barmode="group"
+            )
             st.plotly_chart(fig, width="stretch")
             st.caption(f"Base: {base['ensayo_id'].nunique()} ensayos con dato en esta variable. Se podía marcar más de una opción. "
                        "En campañas viejas algunas categorías no existían.")
+            
             cm = st.selectbox("Cruzar con una métrica", list(metricas), format_func=etiqueta, key="mv_m")
             x = ex.merge(f[["ensayo_id", cm]], on="ensayo_id").dropna(subset=[cm])
             if not x.empty:
                 st.plotly_chart(px.box(x, x=cm, y="valor", points="all", title=f"{etiqueta(cm)} según {etiqueta(mv).lower()}",
                                        labels={cm: etiqueta(cm), "valor": ""},
                                        color="valor", color_discrete_sequence=PALETA_DISCRETA), width="stretch")
-
+                
     # COMPLETITUD Y DATOS
     with sub_dat:
         cols = [c for c in list(metricas) + list(categ) + list(multi) + [a + x for a in ATRIBUTOS for x in ("_marcado", "_intensidad")] + FECHAS if c in f and c != "campana"]

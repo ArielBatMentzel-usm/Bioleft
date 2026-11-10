@@ -9,6 +9,7 @@ CREATE TABLE "campanas" (
 
 CREATE TABLE "participantes" (
   "participante_id" TEXT NOT NULL,
+  "genero" TEXT,
   PRIMARY KEY ("participante_id")
 );
 
@@ -255,6 +256,7 @@ CREATE TABLE "degustacion" (
 
 CREATE UNIQUE INDEX ON "ciudades" ("nombre", "provincia_id");
 
+-- La agregamos para garantizar, mediante una FK compuesta, que cada SITIO pertenezca a una ciudad de su misma provincia.
 CREATE UNIQUE INDEX ON "ciudades" ("ciudad_id", "provincia_id");
 
 CREATE INDEX "idx_ensayos_sitio" ON "ensayos" ("sitio_id");

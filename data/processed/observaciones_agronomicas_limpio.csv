@@ -371,16 +371,10 @@ campaña,id_participante,id_sitio,sub_ensayo,variedad_id,anio_multiplicacion,eta
 2024-2025,AA009T,AA009T,1,V56,,Trasplante a suelo,superficie_parcela_m2,24.0,
 2024-2025,AA009T,AA009T,1,V56,,Trasplante a suelo,fecha_trasplante_suelo,2024-10-07,
 2024-2025,AA009T,AA009T,1,V56,,Trasplante a suelo,cantidad_plantas_trasplantadas_parcela,3,
-2024-2025,AA009T,AA009T,1,V56,,Trasplante a suelo,densidad_plantas_m2,0.125,
-2024-2025,AA009T,AA009T,1,V56,,Trasplante a suelo,cobertura_suelo,Sin cobertura,
-2024-2025,AA009T,AA009T,1,V56,,Trasplante a suelo,cantidad_plantas_implantadas,3,
 2024-2025,AA009T,AA009T,1,V172,,Trasplante a suelo,ubicacion_parcela,En invernadero,
 2024-2025,AA009T,AA009T,1,V172,,Trasplante a suelo,superficie_parcela_m2,24.0,
 2024-2025,AA009T,AA009T,1,V172,,Trasplante a suelo,fecha_trasplante_suelo,2024-10-07,
 2024-2025,AA009T,AA009T,1,V172,,Trasplante a suelo,cantidad_plantas_trasplantadas_parcela,3,
-2024-2025,AA009T,AA009T,1,V172,,Trasplante a suelo,densidad_plantas_m2,0.083,
-2024-2025,AA009T,AA009T,1,V172,,Trasplante a suelo,cobertura_suelo,Sin cobertura,
-2024-2025,AA009T,AA009T,1,V172,,Trasplante a suelo,cantidad_plantas_implantadas,2,
 2024-2025,AA009T,AA009T,1,V7,,Labores,desbrote,Sí,
 2024-2025,AA009T,AA009T,1,V7,,Labores,tutorado,Sí,
 2024-2025,AA009T,AA009T,1,V7,,Labores,conduccion,A un tallo,
@@ -1111,10 +1105,8 @@ campaña,id_participante,id_sitio,sub_ensayo,variedad_id,anio_multiplicacion,eta
 2024-2025,AA022T,AA022T,1,V56,,Trasplante a maceta,cantidad_plantines_trasplantados,2,
 2024-2025,AA022T,AA022T,1,V56,,Trasplante a maceta,cantidad_plantines_implantados,2,
 2024-2025,AA022T,AA022T,1,V9,,Trasplante a suelo,ubicacion_parcela,En invernadero,
-2024-2025,AA022T,AA022T,1,V9,,Trasplante a suelo,superficie_parcela_m2,24.0,
 2024-2025,AA022T,AA022T,1,V9,,Trasplante a suelo,fecha_trasplante_suelo,2024-12-15,
 2024-2025,AA022T,AA022T,1,V9,,Trasplante a suelo,cantidad_plantas_trasplantadas_parcela,3,
-2024-2025,AA022T,AA022T,1,V9,,Trasplante a suelo,cantidad_plantas_implantadas,2,
 2024-2025,AA022T,AA022T,1,V9,,Trasplante a suelo,comentarios_generales,"Una de las plantas de Rojo Mediano 9 murió. Se habia empezado a secar y aunque la regué mucho, se secó.",
 2024-2025,AA022T,AA022T,1,V55,,Trasplante a suelo,cantidad_plantas_trasplantadas_parcela,2,
 2024-2025,AA022T,AA022T,1,V55,,Trasplante a suelo,cantidad_plantas_implantadas,2,
@@ -8554,15 +8546,21 @@ Poco sabor",
 2023-2024,AA023T,AA023T,1,V56,,Trasplante a maceta,cultivo_asociado_maceta,Aromáticas y medicinales,
 2023-2024,AA023T,AA023T,1,V56,,Trasplante a maceta,cultivo_asociado_maceta,Frutas y hortalizas,
 2023-2024,AA023T,AA023T,1,V56,,Trasplante a maceta,cultivo_asociado_maceta,Flores y ornamentales,
-2024-2025,AA022T,AA022T,1,V55,,Trasplante a suelo,superficie_parcela_m2,24.0,Fila creada mediante corrección manual
-2024-2025,AA022T,AA022T,1,V56,,Trasplante a suelo,superficie_parcela_m2,24.0,Fila creada mediante corrección manual
+2024-2025,AA009T,AA009T,1,V56,,Trasplante a suelo,cantidad_plantas_implantadas,3,Fila creada/corregida manualmente
+2024-2025,AA009T,AA009T,1,V56,,Trasplante a suelo,densidad_plantas_m2,0.125,Fila creada/corregida manualmente
+2024-2025,AA009T,AA009T,1,V56,,Trasplante a suelo,cobertura_suelo,Sin cobertura,Fila creada/corregida manualmente
+2024-2025,AA009T,AA009T,1,V172,,Trasplante a suelo,cantidad_plantas_implantadas,2,Fila creada/corregida manualmente
+2024-2025,AA009T,AA009T,1,V172,,Trasplante a suelo,densidad_plantas_m2,0.083,Fila creada/corregida manualmente
+2024-2025,AA009T,AA009T,1,V172,,Trasplante a suelo,cobertura_suelo,Sin cobertura,Fila creada/corregida manualmente
+2024-2025,AA022T,AA022T,1,V9,,Trasplante a suelo,cantidad_plantas_implantadas,2,Fila creada/corregida manualmente
+2024-2025,AA022T,AA022T,1,V9,,Trasplante a suelo,superficie_parcela_m2,24.0,Fila creada/corregida manualmente
+2024-2025,AA022T,AA022T,1,V55,,Trasplante a suelo,superficie_parcela_m2,24.0,Fila creada/corregida manualmente
+2024-2025,AA022T,AA022T,1,V56,,Trasplante a suelo,superficie_parcela_m2,24.0,Fila creada/corregida manualmente
 2024-2025,AA005T,AA005T,1,V7,,Trasplante a suelo,cultivo_asociado_suelo,Flores y ornamentales,
 2024-2025,AA005T,AA005T,1,V7,,Trasplante a suelo,cultivo_asociado_suelo,Aromáticas y medicinales,
 2024-2025,AA005T,AA005T,1,V56,,Trasplante a suelo,cultivo_asociado_suelo,Flores y ornamentales,
 2024-2025,AA005T,AA005T,1,V56,,Trasplante a suelo,cultivo_asociado_suelo,Aromáticas y medicinales,
 2024-2025,AA009T,AA009T,1,V7,,Trasplante a suelo,cultivo_asociado_suelo,Frutas y hortalizas,
-2024-2025,AA009T,AA009T,1,V56,,Trasplante a suelo,cultivo_asociado_suelo,Frutas y hortalizas,
-2024-2025,AA009T,AA009T,1,V172,,Trasplante a suelo,cultivo_asociado_suelo,Frutas y hortalizas,
 2024-2025,AA008T,AA008T,1,V7,,Trasplante a suelo,cultivo_asociado_suelo,Aromáticas y medicinales,
 2024-2025,AA008T,AA008T,1,V7,,Trasplante a suelo,cultivo_asociado_suelo,Frutas y hortalizas,
 2024-2025,AA008T,AA008T,1,V56,,Trasplante a suelo,cultivo_asociado_suelo,Aromáticas y medicinales,
@@ -8756,6 +8754,8 @@ Poco sabor",
 2025-2026,AA023T,AA023T,2,V56,2025,Trasplante a suelo,cultivo_asociado_suelo,Flores y ornamentales,actualización planilla Yael
 2025-2026,AA023T,AA023T,1,V113,,Trasplante a suelo,cultivo_asociado_suelo,Frutas y hortalizas,actualización planilla Yael
 2025-2026,AA023T,AA023T,1,V113,,Trasplante a suelo,cultivo_asociado_suelo,Flores y ornamentales,actualización planilla Yael
+2024-2025,AA009T,AA009T,1,V56,,Trasplante a suelo,cultivo_asociado_suelo,Frutas y hortalizas,Fila creada/corregida manualmente
+2024-2025,AA009T,AA009T,1,V172,,Trasplante a suelo,cultivo_asociado_suelo,Frutas y hortalizas,Fila creada/corregida manualmente
 2024-2025,AA023T,AA023T,1,V56,,Labores,fertilizacion,"Compost, lombricompuesto, humus o bokashi",
 2024-2025,AA023T,AA023T,1,V7,,Labores,fertilizacion,"Compost, lombricompuesto, humus o bokashi",
 2024-2025,AA023T,AA023T,2,V56,2024,Labores,fertilizacion,"Compost, lombricompuesto, humus o bokashi",
@@ -9259,7 +9259,6 @@ Poco sabor",
 2022-2023,H033T,H033T,1,V67,,Cosecha y poscosecha,fecha_ultima_cosecha,2023-02-28,
 2022-2023,H033T,H033T,1,VGEMA,,Cosecha y poscosecha,fecha_ultima_cosecha,2023-02-28,
 2022-2023,H033T,H033T,1,VMATU,,Cosecha y poscosecha,fecha_ultima_cosecha,2023-02-28,
-2022-2023,H037T,H037T,1,V11,,Cosecha y poscosecha,fecha_ultima_cosecha,2023-02-01,
 2022-2023,H038T,H038T,1,V67,,Cosecha y poscosecha,fecha_ultima_cosecha,2023-03-01,
 2022-2023,H038T,H038T,1,V94,,Cosecha y poscosecha,fecha_ultima_cosecha,2023-03-01,
 2022-2023,H041T,H041T,1,V80,,Cosecha y poscosecha,fecha_ultima_cosecha,2023-01-23,

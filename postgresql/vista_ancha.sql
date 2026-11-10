@@ -8,6 +8,7 @@ SELECT
   e.ensayo_id,
   e.campana,
   s.participante_id AS id_participante,
+  par.genero AS genero_participante,
   e.sitio_id        AS id_sitio,
   p.nombre          AS provincia,
   ci.nombre         AS localidad,
@@ -95,6 +96,7 @@ SELECT
   mv_causa_muerte_plantas.causa_muerte_plantas
 FROM ensayos e
 LEFT JOIN sitios s      ON s.sitio_id = e.sitio_id
+LEFT JOIN participantes par ON par.participante_id = s.participante_id
 LEFT JOIN provincias p  ON p.provincia_id = s.provincia_id
 LEFT JOIN ciudades ci   ON ci.ciudad_id = s.ciudad_id
 LEFT JOIN variedades v  ON v.variedad_id = e.variedad_id

@@ -4,8 +4,3 @@
 __pycache__/
 .streamlit/secrets.toml
 .venv
-
-auditoria_y_preprocesamiento.ipynb
-comentarios
-data/helpers
-subir_a_neon

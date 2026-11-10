@@ -9,6 +9,7 @@ CREATE TABLE "campanas" (
 
 CREATE TABLE "participantes" (
   "participante_id" TEXT NOT NULL,
+  "genero" TEXT,
   PRIMARY KEY ("participante_id")
 );
 

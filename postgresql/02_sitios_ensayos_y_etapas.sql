@@ -133,6 +133,7 @@ CREATE TABLE "degustacion" (
 
 CREATE UNIQUE INDEX ON "ciudades" ("nombre", "provincia_id");
 
+-- Se agrega para garantizar, mediante una FK compuesta, que cada SITIO pertenezca a una ciudad de su misma provincia.
 CREATE UNIQUE INDEX ON "ciudades" ("ciudad_id", "provincia_id");
 
 CREATE INDEX "idx_ensayos_sitio" ON "ensayos" ("sitio_id");

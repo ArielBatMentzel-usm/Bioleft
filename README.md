@@ -57,3 +57,9 @@ Se abre en el navegador en http://localhost:8501.
 | `requirements.txt` | Dependencias de Python |
 | `vistas.sql` | Definición de la vista `v_ensayos_ancho` |
 | `.gitignore` | Evita subir `.env` y archivos temporales |
+
+
+
+
+
+*Aclaración importante sobre el procesador de comentarios*: se revisó, iteró y aseguró el correcto funcionamiento y la consistencia de los resultados del archivo `comentarios/procesar_comentarios.py` sobre las reglas definidas. Pero no se indagó en como se procesaban estos comentarios, la revisión humana fue más por el lado de garantizar la integridad y coherencia de los resultados y las observaciones agregadas.

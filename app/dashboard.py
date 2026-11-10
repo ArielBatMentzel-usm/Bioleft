@@ -18,6 +18,14 @@ import streamlit as st
 from dotenv import load_dotenv
 from sqlalchemy import create_engine, text
 
+st.markdown("""
+    <style>
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    .stAppDeployButton {display: none;}
+    </style>
+    """, unsafe_allow_html=True)
+
 load_dotenv()
 st.set_page_config(page_title="Bioleft · Tablero de ensayos", page_icon="🍅", layout="wide")
 

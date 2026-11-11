@@ -113,10 +113,10 @@ def etiqueta_atrib(col: str) -> str:
 
 # --- CARGA DE DATOS
 def obtener_url():
-    url = os.getenv("DATABASE_URL")
+    url = os.getenv("DATABASE_URL_POOLED")
     if not url:
         try:
-            url = st.secrets["DATABASE_URL"]  # Streamlit Cloud
+            url = st.secrets["DATABASE_URL_POOLED"]  # Streamlit Cloud
         except Exception:
             url = None
     if url and url.startswith("postgres://"):

@@ -6,19 +6,21 @@ Carga el dataset final en formato LARGO (observaciones_agronomicas_limpio.csv) a
 (ensayos, una tabla por etapa, tablas intermedias de las variables multivalor y comentarios).
 
 Antes hay que haber corrido (una vez, y de nuevo cada vez que cambien los valores / sitios):
-    01_cargar_catalogos.py     (etapas y categorías de las variables multivalor)
-    02_cargar_sitios.py        (participantes, provincias, ciudades y sitios)
+    python -m scripts.carga_neon.01_cargar_catalogos
+    python -m scripts.carga_neon.02_cargar_sitios
 
-Uso (la ruta del CSV es opcional: por defecto lee <raíz del repo>/data/processed/observaciones_agronomicas_limpio.csv):
-    python subir_a_neon/03_cargar_observaciones.py --dry-run                   # prueba todo y deshace
-    python subir_a_neon/03_cargar_observaciones.py                             # carga de verdad
-    python subir_a_neon/03_cargar_observaciones.py campana_nueva.csv --campanas 2026-2027   # solo esa campaña
+Uso (desde la raíz del proyecto; la ruta del CSV es opcional: por defecto lee <raíz del repo>/data/processed/observaciones_agronomicas_limpio.csv):  
+    python -m scripts.carga_neon.03_cargar_observaciones --dry-run                              # prueba todo y deshace
+    python -m scripts.carga_neon.03_cargar_observaciones                                        # carga de verdad
+    python -m scripts.carga_neon.03_cargar_observaciones campana_nueva.csv --campanas 2026-2027 # solo esa campaña
 
+
+    
 Cómo funciona (modo "reemplazar por campaña"):
   * Para cada campaña que viene en el CSV: borra sus ensayos en la base (y, en cascada, sus etapas, valores
     multivalor y comentarios) y los vuelve a cargar. Correrlo dos veces deja la base igual (idempotente).
   * Las demás campañas no se tocan. degustacion_comparativa tampoco (no sale de este CSV).
-  * TODO ocurre en UNA transacción: si algo falla, no queda nada a medias.
+  * Todo ocurre en UNA transacción: si algo falla, no queda nada a medias.
   * Cada variable simple se busca por nombre entre las columnas de la tabla de su etapa. Una variable del CSV
     sin columna en la base NO se carga y queda anotada en la conciliación (con aviso).
   * Los valores multivalor se traducen a id con los catálogos de la base (sirve tanto el valor corto como la
@@ -45,7 +47,7 @@ from scripts.carga_neon.helpers import cerrar, conectar
 # Si no se pasa ruta, se busca en <raíz del repo>/data/processed/ 
 CSV_POR_DEFECTO = (
     Path(__file__).resolve().parent.parent.parent
-    / 'data' / 'processed' / 'sitios_ubicacion.csv'
+    / 'data' / 'processed' / 'observaciones_agronomicas_limpio.csv'
 )
 
 COLUMNAS_CSV = ['campaña', 'id_sitio', 'sub_ensayo', 'variedad_id', 'etapa', 'variable', 'valor']

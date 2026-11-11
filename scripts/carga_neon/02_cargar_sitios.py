@@ -15,10 +15,11 @@ Es idempotente: se puede correr todas las veces que haga falta.
   * no borra nada: si un sitio está en la base pero no en el CSV, solo avisa.
   * provincia o localidad vacías quedan en NULL (sitio sin ubicación / con solo provincia).
 
-Uso (ambos CSV tienen rutas por defecto dentro de data/processed/):
-    python scripts/carga_neon/02_cargar_sitios.py --dry-run
-    python scripts/carga_neon/02_cargar_sitios.py ruta/sitios_ubicacion.csv
-    python scripts/carga_neon/02_cargar_sitios.py ruta/sitios_ubicacion.csv --csv-participantes ruta/participantes.csv
+Uso (desde la raíz del proyecto; ambos CSV tienen rutas por defecto dentro de data/processed/):
+    python -m scripts.carga_neon.02_cargar_sitios --dry-run
+    python -m scripts.carga_neon.02_cargar_sitios ruta/sitios_ubicacion.csv
+    python -m scripts.carga_neon.02_cargar_sitios ruta/sitios_ubicacion.csv --csv-participantes ruta/participantes.csv
+
 
 Orden de ejecución: 01_cargar_catalogos -> 02_cargar_sitios -> 03_cargar_observaciones
 """
@@ -30,7 +31,7 @@ from pathlib import Path
 import pandas as pd
 from psycopg2.extras import execute_values
 
-from helpers import cerrar, conectar
+from scripts.carga_neon.helpers import cerrar, conectar
 
 COLUMNAS_SITIOS = ['sitio_id', 'participante_id', 'provincia', 'localidad']
 COLUMNAS_PARTICIPANTES = ['participante_id', 'genero']

@@ -5,9 +5,10 @@
 Carga (y mantiene) los VALORES de los catálogos: las etapas, las provincias y las categorías de cada variable multivalor.
 Se puede correr todas las veces que haga falta: es idempotente y NO rompe nada de lo ya cargado.
 
-Uso:
-    python 01_cargar_catalogos.py --dry-run     # muestra qué haría y deshace (no cambia nada)
-    python 01_cargar_catalogos.py               # aplica
+Uso (desde la raíz del proyecto):
+    python -m scripts.carga_neon.01_cargar_catalogos --dry-run   # muestra qué haría y deshace (no cambia nada)
+    python -m scripts.carga_neon.01_cargar_catalogos             # aplica
+    
 
 Cada categoría tiene dos textos:
   * valor        -> el nombre CORTO que se guarda y se usa en los análisis y dashboards.

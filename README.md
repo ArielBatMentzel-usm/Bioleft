@@ -51,6 +51,7 @@ El análisis exploratorio de calidad y la depuración del corpus de las 4 campa�
 jupyter notebook auditoria_y_preprocesamiento.ipynb
 ```
 Para procesar y extraer valores estructurados a partir de observaciones libres, se utiliza el módulo en `scripts/tratamiento_comentarios/procesar_comentarios.py`.
+
 *Aclaración sobre el procesador de comentarios*: se revisó, iteró y aseguró el correcto funcionamiento y la consistencia de los resultados del procesador sobre las reglas definidas. Pero no se indagó en como se procesaban estos comentarios, la revisión humana fue más por el lado de garantizar la integridad y coherencia de los resultados y las observaciones agregadas. Esta limitado a las reglas definidas.
 
 ### 2. Base de Datos (PostgreSQL / Neon)

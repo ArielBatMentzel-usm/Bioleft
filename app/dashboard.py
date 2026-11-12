@@ -6,7 +6,7 @@ Lee una vista ancha de Neon (v_ensayos_ancho, 1 fila por ensayo) usando DATABASE
 Es un tablero de consulta pública (no de control): tiene que entenderse solo.
 Tres pestañas por audiencia:
   1. Datos de participación
-  2. Datos agronómicos (productores, productoras y evaluadores): Variedades y Degustación
+  2. Datos para agricultores: Variedades y Degustación
   3. Datos técnicos: distribuciones, manejo (multivalor), completitud y tabla de datos
 """
 import logging
@@ -217,7 +217,7 @@ metricas = {k: v for k, v in METRICAS.items() if k in f and f[k].notna().any()}
 categ = {k: v for k, v in CATEG.items() if k in f and f[k].notna().any()}
 multi = {k: v for k, v in MULTI.items() if k in f and f[k].notna().any()}
 
-t_part, t_agro, t_tec = st.tabs(["Datos de participación", "Datos agronómicos", "Datos técnicos"])
+t_part, t_agro, t_tec = st.tabs(["Datos de participación", "Datos para agricultores", "Datos técnicos"])
 
 # ----- DATOS DE PARTICIPACIÓN
 with t_part:
@@ -270,7 +270,7 @@ with t_part:
         fig_gen.update_traces(texttemplate="%{text}%")
         st.plotly_chart(fig_gen, width="stretch")
 
-# ----- DATOS AGRONÓMICOS
+# ----- DATOS PARA AGRICULTORES
 with t_agro:
     st.caption("Para productores, productoras y evaluadores: qué variedades rinden y cuáles gustan más.")
     # Se muestran todas las variedades; cada persona decide desde cuántos ensayos con dato quiere mirar.
